@@ -4,14 +4,19 @@
 
 import React from 'react'
 import BoutonAction from '../components/boutons/BoutonAction'
+import { usePanda } from '../contexts/PandaContext'
+import BoutonLink from '../components/boutons/BoutonLink';
+import BoutonActionLink from '../components/boutons/BoutonActionLink';
+
 
 export default function GameOver() {
+  const{messageGO, reset} = usePanda();
   return (
     <section className='game-over'>
             <div className='contenair'>
                 <img src="./public/images/game_over.png" alt="Dessin d'un panda avec une auréole et le texte Game Over" />
-                <p>La colère à emporté Cutie Panda, il est au paradis des bambous</p>
-                <BoutonAction>Rejouer</BoutonAction>
+                {messageGO}
+                <BoutonActionLink onClick={reset} lien={"/game-play"} >Rejouer</BoutonActionLink>
             </div>
         </section>
   )
