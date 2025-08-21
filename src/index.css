@@ -1,0 +1,131 @@
+/*Déclaration des fonts*/
+@font-face {
+  font-family: "Inter_18pt-Bold";
+  src: url("/public/fonts/Inter_18pt-Bold.ttf");
+  font-weight: bold;
+}
+
+@font-face {
+  font-family: "Inter_18pt-Regulat";
+  src: url("/public/fonts/Inter_18pt-Regular.ttf");
+  font-weight: normal;
+}
+
+/*Variables*/
+:root{
+  --primary-color: #758478;
+  --background-color: #eeeade;
+  --warning-color: #e7a05a;
+  --danger-color: #e75a5a;
+}
+/*Généralités*/
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+
+h1{
+  font-family: "Inter_18pt-Bold";
+  font-size: 18px;
+  color: #ffffff;
+}
+
+p{
+  font-family: "Inter_18pt-Regular";
+  font-size: 18px;
+}
+
+span{
+  font-weight: bold;
+}
+
+.ecran-portable{
+  max-width: 500px;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--background-color);
+  display: flex;
+  flex-direction: column;
+}
+
+.titre{
+  background-color: var(--primary-color);
+  padding-left: 30px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin-top: 64px;
+}
+
+.primary-btn{
+  background-color: var(--primary-color);
+  color: #ffffff;
+  border-radius: 8px;
+  padding: 32px 24.5px;
+  font-family: "Inter_18pt-Bold";
+  text-decoration: none;
+}
+
+/*Spécificité page accueil*/
+.accueil{
+  height: 100%;
+
+  .contenair{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 5rem;
+
+    p{
+      text-align: center;
+      padding: 0 40px;
+    }
+  }
+
+  .primary-btn{
+    padding: 32px 64px;
+  }
+}
+
+/*Spécificité page GameOver*/
+.game-over{
+  height: 100%;
+
+  .contenair{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: center;
+    margin-top: 5rem;
+
+    p{
+      text-align: center;
+      padding: 0 100px;
+    }
+  }
+
+  .primary-btn{
+    padding: 32px 64px;
+  }
+}
+
+/*Spécificité page GamePlay*/
+.game-play{
+  height: 100%;
+
+  .contenair{
+
+    .contenair-statut{
+      display: flex;
+      justify-content: center;
+      background-image: url('/public/images/bambous.png');
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      margin-top: 1rem;
+    }
+  }
+}
