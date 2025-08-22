@@ -11,16 +11,12 @@ import { usePanda } from '../contexts/PandaContext'
 import BoutonAction from '../components/boutons/BoutonAction'
 import { useNavigate } from 'react-router'
 import MessageEphemere from '../components/display/MessageEphemere'
+import Jauge from '../components/display/Jauge'
 
 export default function GamePlay() {
     const{humeur, energie, argent, travailler, dormir, jouer, manger, messageGO, messageEA} = usePanda()
 
-    //Je crée une constante pour gérer la couleur des jauges
-    const getColor = (value)=>{
-        if (value <= 10) return '#e75a5a';
-        if (value <= 30) return '#e7a05a';
-        return '#758478';
-    }
+    
 
     //La navigation se fait dans le composant
     const navigate = useNavigate();
@@ -41,19 +37,19 @@ export default function GamePlay() {
                 <div className='contenair-jauge'>
                     <HiOutlineEmojiHappy className="icone"/>
                     <div className='jauge'>
-                        <div className='remplissage' style={{width: `${humeur}%`, backgroundColor: getColor(humeur)}}></div>
+                        <Jauge valeur={humeur}/>
                     </div>
                 </div>
                 <div className='contenair-jauge'>
                     <PiBatteryChargingVerticalLight className="icone rotate"/>
                     <div className='jauge'>
-                        <div className='remplissage' style={{width: `${energie}%`, backgroundColor: getColor(energie)}}></div>
+                        <Jauge valeur={energie}/>
                     </div>
                 </div>
                 <div className='contenair-jauge'>
                     <PiMoneyFill className="icone underligne"/>
                     <div className='jauge'>
-                        <div className='remplissage' style={{width: `${argent}%`, backgroundColor: getColor(argent)}}></div>
+                        <Jauge valeur={argent}/>
                     </div>
                 </div>
             </div>
