@@ -1,10 +1,32 @@
 // Composant pour la creation d'un bouton avec le texte modulatble, la fonction à choisir et le lien
 
-import React, { useRef } from 'react';
-import { NavLink } from 'react-router';
+
+import { useNavigate } from 'react-router-dom';
 
 export default function BoutonActionLink({ children, lien, onClick, ...props }) {
+  
+  const navigate = useNavigate()
+
+  const handleClick = () => {
+    if (onClick) onClick();
+
+    setTimeout(() => {
+      navigate(lien);
+    }, 1000);
+  };
+
+  return (
+    <>
+      <button {...props} className="primary-btn" onClick={handleClick}>
+        {children}
+      </button>
+    </>
+  );
+}
+{/* 
+  export default function BoutonActionLink({ children, lien, onClick, ...props }) {
   const linkRef = useRef();
+  const navigate = useNavigate()
 
   const handleClick = () => {
     if (onClick) onClick();
@@ -28,3 +50,4 @@ export default function BoutonActionLink({ children, lien, onClick, ...props }) 
     </>
   );
 }
+  */}

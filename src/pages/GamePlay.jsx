@@ -10,9 +10,10 @@ import { PiMoneyFill } from "react-icons/pi"
 import { usePanda } from '../contexts/PandaContext'
 import BoutonAction from '../components/boutons/BoutonAction'
 import { useNavigate } from 'react-router'
+import MessageEphemere from '../components/display/MessageEphemere'
 
 export default function GamePlay() {
-    const{humeur, energie, argent, travailler, dormir, jouer, manger, messageGO} = usePanda()
+    const{humeur, energie, argent, travailler, dormir, jouer, manger, messageGO, messageEA} = usePanda()
 
     //Je crée une constante pour gérer la couleur des jauges
     const getColor = (value)=>{
@@ -63,7 +64,7 @@ export default function GamePlay() {
                 <BoutonAction onClick={jouer}>Jouer</BoutonAction>
             </div>
             <div className='contenair-message'>
-                <p>Test</p>
+                <MessageEphemere>{messageEA}</MessageEphemere>
             </div>
         </div>
     </section>

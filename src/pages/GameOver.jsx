@@ -14,7 +14,7 @@ export default function GameOver() {
   return (
     <section className='game-over'>
             <div className='contenair'>
-                <img src="./public/images/game_over.png" alt="Dessin d'un panda avec une auréole et le texte Game Over" />
+                <img src="/images/game_over.png" alt="Dessin d'un panda avec une auréole et le texte Game Over" />
                 {messageGO}
                 <BoutonActionLink onClick={reset} lien={"/game-play"} >Rejouer</BoutonActionLink>
             </div>

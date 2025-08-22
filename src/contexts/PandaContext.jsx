@@ -20,7 +20,17 @@ export default function PandaProvider({children}) {
     const[statut, setStatut] = useState("joie")
     const[messageGO, setMessageGO] = useState("")
     const[isGameOver, setIsGameOver] = useState(false)
+    const[isEnCours, setIsEnCours] = useState(false)
+    const[messageEA, setMessageEA] = useState("")
 
+    const evenements = [
+        {texte: "Vous trouvez un billet de 20€ par terre !", effet: 20, stat: "argent"},
+        {texte: "Vous avez oublié de payer votre loyer…", effet: -30, stat: "argent"},
+        {texte: "Un ami vous invite au cinéma gratuitement !", effet: 10, stat: "humeur"},
+        {texte: "Vous tombez malade…", effet: -15, stat: "energie"}
+    ]
+
+    /*-----------Gestion du statut--------------- */
     //Fonction pour obtenir le statut de mon panda:
     function getStatut({energie, humeur, argent}){
         //Role: Obtenir le statut de mon panda en fonction de son energie, son humeur et son argent en partant du status de base qui est joie
@@ -41,21 +51,68 @@ export default function PandaProvider({children}) {
         setStatut(nouveauStatut);
     },[energie, humeur,argent])
 
+
+
+    /*-----------Gestion du GameOver--------------- */
     //Je crée le useEffect pour détecter le GameOver
     useEffect(()=>{
-        if(!isGameOver){
-            const message = gameOver(energie, humeur, argent);
-            if(message){
-                setMessageGO(message);
-            }
+        if (isGameOver) return;
+
+        if (energie <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            setMessageGO(<p>La fatigue a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>);
+            return;
         }
+
+        if (humeur <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            setMessageGO(<p>La colère a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>);
+            return;
+        }
+
+        if (argent <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            setMessageGO(<p><span>Cutie Panda</span> est ruiné</p>);
+            return;
+        }
+
     }, [energie, humeur, argent, isGameOver])
 
+
+    //Fonctions pour le Game Over
+    function gameOver(energie, humeur, argent){
+        //Role: Retourner un message adapté si un état passe à 0
+        //Parametre: energie, humeur, argent
+        //Retour: le message adapté  
+        if(energie <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            return <p>La fatigue a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>
+        }
+        if(humeur <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            return <p>La colère a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>
+        }
+        if(argent <= 0) {
+            setIsGameOver(true);
+            setIsEnCours(false);
+            return <p><span>Cutie Panda</span> est ruiné</p>
+        }
+        return null;
+    }
+
+
+
+    /*----------Gestion des actions automatiques------- */
     //Je crée le useEffect qui affecte les stat toutes les 10 secondes
     useEffect(()=>{
         const interval = setInterval(() => {
             //Je vérifie si le jeu est en cours
-            if(!isGameOver){
+            if(!isGameOver && isEnCours){
                 //Je crée un interval qui modifie la valeur actuelle de l'état avec prev 
                 //Comme ça j'utilise la bonne valeur meme si l'utilisateur a fait une modification dans l'interval des 10 secondes
                 setEnergie(prev => prev - 5);
@@ -65,15 +122,53 @@ export default function PandaProvider({children}) {
 
         return () => clearInterval(interval); //  nettoyage à la fin
 
-    }, [isGameOver])
+    }, [isGameOver, isEnCours])
+
 
     //Je crée le useEffect qui gère les évenements aléatoire
+    useEffect(()=>{
+        const interval = setInterval(()=>{
+            //Je vérifie si le jeu est en cours
+            if(!isGameOver && isEnCours){
+                const evenement = eventAleatoire();
+                effetAleatoire(evenement);
+            }
+        }, 30000)   //Toutes les 30 secondes
+
+        return () => clearInterval(interval); //  nettoyage à la fin
+        
+    }, [isGameOver, isEnCours])
 
     //Je crée la function qui gère les évenement aléatoire
-    
+    function eventAleatoire(){
+        //Role: choisir un évenement aléatoire
+        //Parametre: Néant
+        //Retour, l'index d'un évenement
+        const index = Math.floor(Math.random()*evenements.length);
+        const evenement = evenements[index]
+        return evenement;
+    }
 
-    //Fonctions pour gérer les interactions en faisant en sorte que les états ne dépasse pas 100
-    //Pour empecher de dépasser 100, utilisation de Math.min(100, valeur)
+    function effetAleatoire(evenement){
+        //Role: appliquer l'evenement à la stat et modifier le message de l'evenement aléatoire
+        //Parametre: l'évenement
+        //Retour: Néant
+        if (evenement.stat == "argent"){
+            setArgent(prev => prev + evenement.effet);
+        }
+        if (evenement.stat == "humeur"){
+            setHumeur(prev => prev + evenement.effet);
+        }
+        if (evenement.stat == "energie"){
+            setEnergie(prev => prev + evenement.effet);
+        }
+        setMessageEA(evenement.texte);
+    }
+
+
+
+    /*----Fonctions pour gérer les interactions en faisant en sorte que les états ne dépasse pas 100
+    Pour empecher de dépasser 100, utilisation de Math.min(100, valeur)----*/
     function travailler(){
         //Role: modifier les états energie, humeur et argent
         //Parametre: néant
@@ -88,12 +183,11 @@ export default function PandaProvider({children}) {
         setArgent(newArgent);
 
         //Je vérifie si un des état est égal à 0
-        const message = gameOver(newArgent, newEnergie, newHumeur);
+        const message = gameOver(newEnergie, newHumeur, newArgent);
         if(message){
             //Si oui, je rempli la variable messageGO
             setMessageGO(message);
         }
-
     }
 
     function dormir(){
@@ -129,7 +223,7 @@ export default function PandaProvider({children}) {
         setArgent(newArgent);
 
         //Je vérifie si un des état est égal à 0
-        const message = gameOver(newArgent, newEnergie, newHumeur);
+        const message = gameOver(newEnergie, newHumeur, newArgent);
         if(message){
             //Si oui, je rempli la variable messageGO
             setMessageGO(message);
@@ -150,32 +244,22 @@ export default function PandaProvider({children}) {
         setArgent(newArgent);
 
         //Je vérifie si un des état est égal à 0
-        const message = gameOver(newArgent, newEnergie, newHumeur);
+        const message = gameOver(newEnergie, newHumeur, newArgent);
         if(message){
             //Si oui, je rempli la variable messageGO
             setMessageGO(message);
         }
     }
 
-    //Fonctions pour le Game Over
-    function gameOver(energie, humeur, argent){
-        //Role: Retourner un message adapté si un état passe à 0
-        //Parametre: energie, humeur, argent
-        //Retour: le message adapté  
-        if(energie <= 0) {
-            setIsGameOver(true);
-            return <p>La fatigue a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>
-        }
-        if(humeur <= 0) {
-            setIsGameOver(true);
-            return <p>La colère a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>
-        }
-        if(argent <= 0) {
-            setIsGameOver(true);
-            return <p><span>Cutie Panda</span> est ruiné</p>
-        }
-        return null;
+    /*---------Fonction pour démarrer le jeu---------*/
+    function demarrer(){
+        //Role: changer l'état de isEnCours. La passer à true
+        //Parametre: Néant
+        //Retour: Néant
+        setIsEnCours(true); 
     }
+
+    /*---------Fonction pour gérer le reset--------- */
 
     //Fonction reset
     function reset(){
@@ -187,10 +271,14 @@ export default function PandaProvider({children}) {
         setHumeur(100);
         setStatut("joie");
         setIsGameOver(false);
+        setIsEnCours(true);
+        setMessageGO("");
+        setMessageEA("");
     }
 
+
   return (
-    <PandaContext.Provider value={{energie, humeur, argent, statut, messageGO, travailler, dormir, jouer, manger, reset}}>
+    <PandaContext.Provider value={{energie, humeur, argent, statut, messageGO, messageEA, travailler, dormir, jouer, manger, reset, demarrer}}>
         {children}
     </PandaContext.Provider>
   )
