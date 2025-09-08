@@ -3,30 +3,40 @@ Bienvenue dans Cutie Panda, une application React développée avec Vite.js, qui
 Projet réalisé dans le cadre de l'examen final de la formation RNCP Développeur Web de Webecom. Promotion 2025
 Images fournies par Webecom.
 
+
 🧠 Objectif du jeu
+
 L’utilisateur incarne un panda et doit gérer ses trois statistiques principales :
 - ⚡ Énergie : diminue avec le temps, augmente en dormant ou en mangeant.
 - 😊 Humeur : diminue avec le travail, augmente avec les loisirs.
 - 💰 Argent : augmente en travaillant, diminue en s’amusant ou en mangeant.
 Le jeu se termine (Game Over) si l’une des statistiques atteint 0.
 
+
 🚀 Fonctionnalités
+
 ✅ Statistiques dynamiques
+
 - Dégradation automatique de l’énergie et de l’humeur toutes les 10 secondes.
 - Changement de couleur des barres selon les seuils :
 - < 30 → orange
 - < 10 → rouge + animation "danger"
+
 ✅ Actions disponibles
+
 - Travailler
 - Dormir
 - S'amuser
 - Manger
+
 ✅ Événements aléatoires
+
 Toutes les 30 secondes, un événement aléatoire peut survenir :
 - 💰 +20 : "Vous trouvez un billet de 20€ par terre !"
 - 💰 -30 : "Vous avez oublié de payer votre loyer…"
 - 😊 +10 : "Un ami vous invite au cinéma gratuitement !"
 - ⚡ -15 : "Vous tombez malade…"
+
 
 🧩 Technologies utilisées
 - ⚛️ React (avec Vite.js)
@@ -48,30 +58,15 @@ npm install react-icons
 # Lancer le projet en local
 npm run dev
 
-🗂️ Structure du projet
-cutie-panda/
-│
-├── public/               # Dossier contenant les images et ressources statiques
-│   └── images/           # Images du jeu (panda, décor, icônes, etc.)
-│
-├── src/
-│   ├── components/       # Composants réutilisables (Barres, Boutons, etc.)
-│   ├── context/          # PandaContext pour la logique du jeu
-│   ├── pages/            # Page principale du jeu
-│   ├── App.jsx           # Point d’entrée de l’application
-│   └── main.jsx          # Initialisation React + Vite
-│
-├── index.html            # Fichier HTML principal (utilisé par Vite)
-├── package.json          # Dépendances et scripts
-├── vite.config.js        # Configuration Vite
-└── README.md             # Documentation du projet
-
 
 🔁 Redémarrage & Game Over
+
 - Un message de fin s’affiche si une stat atteint 0.
 - Un bouton permet de redémarrer une nouvelle partie avec les valeurs initiales.
 
+
 🧭 Retour d’expérience
+
 Ce projet m’a permis de consolider et de mettre en pratique plusieurs compétences clés en développement front-end avec React. En particulier :
 - 🔧 Structuration d’un projet React avec Vite.js : j’ai appris à organiser proprement les composants, le contexte, et les pages pour une meilleure lisibilité et évolutivité du code.
 - ⏱️ Gestion des effets temporels avec useEffect : j’ai mis en place des intervalles pour simuler la dégradation naturelle des statistiques et l’apparition d’événements aléatoires, ce qui m’a permis de mieux comprendre la gestion du cycle de vie des composants.
