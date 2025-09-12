@@ -14,7 +14,7 @@ import React from 'react'
 export default function PandaProvider({children}) {
 
     //Je crée mes états
-    const[energie, setEnergie] = useState(100)
+    const[energie, setEnergie] = useState((100))
     const[humeur, setHumeur] = useState(100)
     const[argent, setArgent] = useState(50)
     const[statut, setStatut] = useState("joie")
@@ -72,7 +72,7 @@ export default function PandaProvider({children}) {
             return;
         }
 
-        if (argent <= 0) {
+        if (argent <= 0 && !peutTravailler()) {
             setIsGameOver(true);
             setIsEnCours(false);
             setMessageGO(<p><span>Cutie Panda</span> est ruiné</p>);
@@ -97,7 +97,7 @@ export default function PandaProvider({children}) {
             setIsEnCours(false);
             return <p>La colère a emporté <span>Cutie Panda</span>, il est au paradis des bambous</p>
         }
-        if(argent <= 0) {
+        if(argent <= 0 && !peutTravailler) {
             setIsGameOver(true);
             setIsEnCours(false);
             return <p><span>Cutie Panda</span> est ruiné</p>
@@ -105,6 +105,16 @@ export default function PandaProvider({children}) {
         return null;
     }
 
+    //Fonction pour vérifier si travailler est possible
+    function peutTravailler(){
+        //Role: Vérifier si Panda peut réaliser l'action travailler
+        //Parametre:
+        //  Neant
+        //Retour; retourne true si peut travailler sinon false
+
+        return energie >= 30 && humeur >= 10;
+
+    }
 
 
     /*----------Gestion des actions automatiques------- */

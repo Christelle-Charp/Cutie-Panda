@@ -16,5 +16,5 @@ export default function DisplayPanda() {
         sommeil: "sommeil.png",
     }
 
-  return <img src={`./public/images/${images[statut]}`} alt={`Panda ${statut}`} />
+  return <img src={`/images/${images[statut]}`} alt={`Panda ${statut}`} />
 }

@@ -1,13 +1,13 @@
 /*Déclaration des fonts*/
 @font-face {
   font-family: "Inter_18pt-Bold";
-  src: url("/public/fonts/Inter_18pt-Bold.ttf");
+  src: url("/fonts/Inter_18pt-Bold.ttf");
   font-weight: bold;
 }
 
 @font-face {
   font-family: "Inter_18pt-Regulat";
-  src: url("/public/fonts/Inter_18pt-Regular.ttf");
+  src: url("/fonts/Inter_18pt-Regular.ttf");
   font-weight: normal;
 }
 
@@ -124,7 +124,7 @@ span{
     .contenair-statut{
       display: flex;
       justify-content: center;
-      background-image: url('/public/images/bambous.png');
+      background-image: url('/images/bambous.png');
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
