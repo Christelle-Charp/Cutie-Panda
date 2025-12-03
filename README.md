@@ -10,7 +10,7 @@ L’utilisateur incarne un panda et doit gérer ses trois statistiques principal
 - ⚡ Énergie : diminue avec le temps, augmente en dormant ou en mangeant.
 - 😊 Humeur : diminue avec le travail, augmente avec les loisirs.
 - 💰 Argent : augmente en travaillant, diminue en s’amusant ou en mangeant.
-Le jeu se termine (Game Over) si l’une des statistiques atteint 0.
+Le jeu se termine (Game Over) si l’une des statistiques atteint 0 ou s'il n'y a plus de solution pour gagner de l'argent.
 
 
 🚀 Fonctionnalités
@@ -46,7 +46,7 @@ Toutes les 30 secondes, un événement aléatoire peut survenir :
 
 📦 Installation
 # Cloner le projet
-git clone https://github.com/votre-utilisateur/cutie-panda.git
+git clone https://github.com/Christelle-Charp/cutie-panda.git
 cd cutie-panda
 
 # Installer les dépendances
@@ -61,7 +61,7 @@ npm run dev
 
 🔁 Redémarrage & Game Over
 
-- Un message de fin s’affiche si une stat atteint 0.
+- Un message de fin s’affiche si une stat atteint 0 ou s'il n'y a plus de solution pour gagner de l'argent.
 - Un bouton permet de redémarrer une nouvelle partie avec les valeurs initiales.
 
 
@@ -75,9 +75,14 @@ Ce projet m’a permis de consolider et de mettre en pratique plusieurs compéte
 
 Ce projet m’a également permis de développer ma rigueur, ma capacité à commenter mon code, et à faire des choix techniques adaptés aux contraintes du cahier des charges. Il m’a donné une vision plus concrète de la conception d’un jeu interactif en React, tout en renforçant mon autonomie et ma créativité.
 
----
 
-## 👩‍💻 Auteur
+🏆 Résultat
+- Note obtenue : 100/100 ✅
+- Application déployée et accessible à l’adresse :
+    👉 https://cutie-panda.christelle-charpinet.fr
+
+
+👩‍💻 Auteur
 
 **Christelle Charpinet**  
 _Webecom – Promotion 2025_

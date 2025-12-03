@@ -288,7 +288,7 @@ export default function PandaProvider({children}) {
 
 
   return (
-    <PandaContext.Provider value={{energie, humeur, argent, statut, messageGO, messageEA, travailler, dormir, jouer, manger, reset, demarrer}}>
+    <PandaContext.Provider value={{energie, humeur, argent, statut, messageGO, messageEA, isEnCours, travailler, dormir, jouer, manger, reset, demarrer}}>
         {children}
     </PandaContext.Provider>
   )

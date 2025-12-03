@@ -14,18 +14,21 @@ import MessageEphemere from '../components/display/MessageEphemere'
 import Jauge from '../components/display/Jauge'
 
 export default function GamePlay() {
-    const{humeur, energie, argent, travailler, dormir, jouer, manger, messageGO, messageEA} = usePanda()
-
-    
+    const{humeur, energie, argent, travailler, dormir, jouer, manger, messageGO, messageEA, isEnCours} = usePanda()
 
     //La navigation se fait dans le composant
     const navigate = useNavigate();
 
     useEffect(() => {
-    if (messageGO) {
-        navigate("/game-over");
-    }
-    }, [messageGO]);
+        if (messageGO) {
+            // priorité au Game Over
+            navigate("/game-over")
+        } else if (!isEnCours) {
+            // sinon, retour à l'accueil
+            navigate("/", { replace: true })
+        }
+    }, [isEnCours, messageGO, navigate])
+
 
   return (
     <section className='game-play'>
