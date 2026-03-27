@@ -1,0 +1,7 @@
+services:
+  cutie-panda:
+    build: .
+    container_name: cutie-panda
+    ports:
+      - "3000:80"
+    restart: always
